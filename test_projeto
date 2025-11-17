@@ -1,0 +1,37 @@
+# Simulação do caso de uso "Cadastrar Usuário"
+
+usuarios_registrados = {}  # Dicionário simulando um banco de dados {email: senha}
+
+def cadastrar_usuario():
+    print("=== Cadastro de Usuário - Smart Ticket ===")
+    nome = input("Digite seu nome: ").strip()
+    email = input("Digite seu e-mail: ").strip()
+    senha = input("Digite sua senha: ").strip()
+
+    # Pré-condição: verificar se o usuário já está cadastrado
+    if email in usuarios_registrados:
+        print("\n[ERRO] Já existe um cadastro com este e-mail.\n")
+        return
+
+    # Validação simples
+    if not nome or not email or not senha:
+        print("\n[ERRO] Todos os campos são obrigatórios.\n")
+        return
+
+    # Criar conta do usuário
+    usuarios_registrados[email] = {"nome": nome, "senha": senha}
+    
+    # Pós-condição: usuário cadastrado
+    print(f"\n[SUCESSO] Usuário '{nome}' cadastrado com sucesso!")
+    print("Agora você pode realizar login.\n")
+
+
+# Exemplo de execução
+if __name__ == "__main__":
+    while True:
+        opcao = input("Deseja cadastrar um novo usuário? (s/n): ").lower()
+        if opcao == 's':
+            cadastrar_usuario()
+        else:
+            print("\nEncerrando o sistema. Até logo!")
+            break
